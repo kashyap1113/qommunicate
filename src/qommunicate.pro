@@ -1,5 +1,5 @@
 TEMPLATES = app
-QT += network
+QT += network widgets
 CONFIG += qt debug
 FORMS += about.ui qommunicate.ui messagedialog.ui settings.ui
 HEADERS += qommunicate.h about.h settings.h messagedialog.h membermodel.h ipobjects.h messenger.h constants.h memberutils.h fileutils.h sendfileprogressdialog.h recvfileprogressdialog.h
