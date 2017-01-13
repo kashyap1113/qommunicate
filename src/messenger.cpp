@@ -47,9 +47,9 @@ QByteArray Message::toAscii()
     arr += ':';
     arr += QByteArray::number(packetNo());
     arr += ':';
-    arr += sender()->name().toAscii();
+    arr += sender()->name().toLatin1();
     arr += ':';
-    arr += sender()->host().toAscii();
+    arr += sender()->host().toLatin1();
     arr += ':';
     arr += QByteArray::number(command());
     arr += ':';
@@ -86,7 +86,7 @@ Message Message::fromAscii(QByteArray arr)
 
 Message Message::fromString(QString s)
 {
-    return Message::fromAscii(s.toAscii());
+    return Message::fromAscii(s.toLatin1());
 }
 
 Messenger::Messenger() : QObject()
@@ -242,18 +242,18 @@ QStringList Messenger::ips() const
 
 bool Messenger::login()
 {
-    multicast(QOM_BR_ENTRY, member_me.name().toAscii()+'\0'+group_me.name().toAscii());
+    multicast(QOM_BR_ENTRY, member_me.name().toLatin1()+'\0'+group_me.name().toLatin1());
 }
 
 bool Messenger::logout()
 {
-    multicast(QOM_BR_EXIT, member_me.name().toAscii()+'\0'+group_me.name().toAscii());
+    multicast(QOM_BR_EXIT, member_me.name().toLatin1()+'\0'+group_me.name().toLatin1());
 }
 
 bool Messenger::nickChanged()
 {
     refreshSettings();
-    multicast(QOM_BR_ABSENCE, member_me.name().toAscii()+'\0'+group_me.name().toAscii());
+    multicast(QOM_BR_ABSENCE, member_me.name().toLatin1()+'\0'+group_me.name().toLatin1());
 }
 
 bool Messenger::refreshSettings()

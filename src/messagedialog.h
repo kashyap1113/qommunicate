@@ -12,6 +12,8 @@
 #include <QTimer>
 #include <QMessageBox>
 
+#include <QMimeData>
+
 #include "ipobjects.h"
 #include "messenger.h"
 #include "ui_messagedialog.h"

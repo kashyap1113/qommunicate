@@ -16,7 +16,7 @@ public:
     static void init();
     
     static void insert(QString, Member*);
-    inline static void insert(const char* c, Member* m) { MemberUtils::insert(QString::fromAscii(c), m); } ;
+    inline static void insert(const char* c, Member* m) { MemberUtils::insert(QString::fromLatin1(c), m); } ;
     
     static bool contains(QString, Member*);
     inline static bool contains(const char* c, Member *m) { return contains(QString(c), m); } ;

@@ -113,7 +113,7 @@ void FileSendProgressDialog::nextFileRequested()
         else if (first.type == QOM_FILE_RETPARENT)
         {
             //qDebug() << fileUtils()->formatFileHeader(first).toAscii();
-            writeBlock(fileUtils()->formatFileHeader(first).toAscii());
+            writeBlock(fileUtils()->formatFileHeader(first).toLatin1());
         }
         if (m_sendBuffer.size()>0)
             writeBlock("");
@@ -147,7 +147,7 @@ void FileSendProgressDialog::sendFile(const FileInfo& info)
     {
         copy.fileName = info.fileName.split('/').last();
         qDebug() << "sendFile: " << copy.fileName;
-        writeBlock(fileUtils()->formatFileHeader(copy).toAscii());
+        writeBlock(fileUtils()->formatFileHeader(copy).toLatin1());
     }
     //qDebug() << fileUtils()->formatFileHeader(copy).toAscii();
     //if (copy.fileName.contains("elf.h"))
@@ -167,7 +167,7 @@ void FileSendProgressDialog::sendDir(const FileInfo& info)
     copy.fileName = copy.fileName.split('/').last();
     qDebug() << copy.fileName;
     //qDebug() << "sendDir: " << fileUtils()->formatFileHeader(copy).toAscii() << m_writingData;
-    writeBlock(fileUtils()->formatFileHeader(copy).toAscii());
+    writeBlock(fileUtils()->formatFileHeader(copy).toLatin1());
     
     // this swap is to prepend the new sub directory entries
     // so that they follow the directory name

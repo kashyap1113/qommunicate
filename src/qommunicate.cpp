@@ -328,7 +328,7 @@ void Qommunicate::saveGroupSettings(QString groupName)
 void Qommunicate::addMemberAndAnswer(Message msg)
 {
     addMember(msg);
-    messenger()->sendMessage(QOM_ANSENTRY, (me().name()+'\0'+myGroup().name()).toAscii(), msg.sender());
+    messenger()->sendMessage(QOM_ANSENTRY, (me().name()+'\0'+myGroup().name()).toLatin1(), msg.sender());
 }
 
 void Qommunicate::removeMember(Message msg)

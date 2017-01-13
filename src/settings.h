@@ -10,6 +10,8 @@
 #include <QMessageBox>
 #include <QUrl>
 
+#include <QMimeData>
+
 #include "ui_settings.h"
 
 class QSettings;

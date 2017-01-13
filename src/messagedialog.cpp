@@ -98,8 +98,8 @@ void MessageDialog::incomingMessage(Message msg)
         return;
     
     QString text = QString("<b style=\"color:blue;\">%1: </b> ")
-                        .arg(Qt::escape(receivers[0]->name()));
-    text += detectUrls(Qt::escape(msg.payload().replace('\a', "").trimmed()));
+                        .arg(QString(receivers[0]->name()).toHtmlEscaped());
+    text += detectUrls(QString(msg.payload().replace('\a', "").trimmed()).toHtmlEscaped());
     ui.messageEdit->append(text);
     QApplication::alert(this, 0);
     
@@ -117,7 +117,7 @@ void MessageDialog::on_sendButton_clicked()
     
     if (receivers.isEmpty())
     {
-        messenger()->multicast(QOM_SENDMSG|QOM_MULTICASTOPT, ui.messageInput->text().toAscii());
+        messenger()->multicast(QOM_SENDMSG|QOM_MULTICASTOPT, ui.messageInput->text().toLatin1());
         QTimer::singleShot(500, this, SLOT(accept()));
         return;
     }
@@ -128,7 +128,7 @@ void MessageDialog::on_sendButton_clicked()
     
     foreach(Member* m, receivers)
     {
-        messenger()->sendMessage( flags, ui.messageInput->text().toAscii(), m);
+        messenger()->sendMessage( flags, ui.messageInput->text().toLatin1(), m);
     }
     if (receivers.size() == 1)
     {
@@ -168,8 +168,8 @@ void MessageDialog::messageRecvConfirm(Message msg)
     
     if (! ui.messageInput->text().trimmed().isEmpty())
         ui.messageEdit->append(QString("<b style=\"color:red;\">%1: </b> %2")
-                            .arg(Qt::escape(me().name()))
-                            .arg(detectUrls(Qt::escape(ui.messageInput->text()))));
+                            .arg(QString(me().name()).toHtmlEscaped())
+                            .arg(detectUrls(QString(ui.messageInput->text()).toHtmlEscaped())));
     
     ui.messageInput->clear();
     ui.messageInput->setEnabled(true);
@@ -185,7 +185,7 @@ void MessageDialog::userOffline(Message msg)
     if (!m_online || msg.sender()->addressString() != receivers[0]->addressString())
         return;
     
-    ui.messageEdit->append(QString("<b style=\"color:magenta\">%1 went offline</b>").arg(Qt::escape(msg.sender()->name())));
+    ui.messageEdit->append(QString("<b style=\"color:magenta\">%1 went offline</b>").arg(QString(msg.sender()->name()).toHtmlEscaped()));
     ui.messageInput->setEnabled(false);
     ui.attachButton->setEnabled(false);
     m_online = false;
@@ -196,7 +196,7 @@ void MessageDialog::userOnline(Message msg)
     if (m_online || msg.sender()->addressString() != receivers[0]->addressString())
         return;
     
-    ui.messageEdit->append(QString("<b style=\"color:orange\">%1 came online</b>").arg(Qt::escape(msg.sender()->name())));
+    ui.messageEdit->append(QString("<b style=\"color:orange\">%1 came online</b>").arg(QString(msg.sender()->name()).toHtmlEscaped()));
     
     ui.messageInput->setEnabled(true);
     ui.attachButton->setEnabled(true);

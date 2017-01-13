@@ -12,6 +12,8 @@
 #include <QSortFilterProxyModel>
 #include <QByteArray>
 
+#include <QMimeData>
+
 #include "membermodel.h"
 #include "messenger.h"
 #include "memberutils.h"

@@ -134,7 +134,7 @@ QString FileUtils::resolveFilePath(int id)
 void FileUtils::sendFilesUdpRequest(QStringList files, Member* to, QString msg="")
 {
     qDebug() << "UDP request" << files ;
-    QByteArray out = msg.toAscii() + '\0' + formatSendFilesRequest(files).toAscii();
+    QByteArray out = msg.toLatin1() + '\0' + formatSendFilesRequest(files).toLatin1();
     messenger()->sendMessage(QOM_SENDMSG | QOM_FILEATTACHOPT | QOM_SENDCHECKOPT, out, to);
 }
 
